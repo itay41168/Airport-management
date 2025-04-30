@@ -2,15 +2,18 @@ package Boundary;
 
 
 import javax.swing.*;
+
 import java.awt.*;
-import Entity.Customer;
-import Control.CustomerController;
+import Control.PassengerController;
 
 public class RegisterForm extends JFrame {
 
     private JTextField txtId, txtName, txtAddress;
+    private String id,name,address;
+    private PassengerController pessengerLogic;
 
     public RegisterForm() {
+    	pessengerLogic=PassengerController.getInstance();
         setTitle("BookingFlights - Register");
         setSize(500, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,18 +60,15 @@ public class RegisterForm extends JFrame {
         btnRegister.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnRegister.setFocusPainted(false);
         btnRegister.addActionListener(e -> {
-            Customer customer = new Customer(
-                txtId.getText(),
-                txtName.getText(),
-                txtAddress.getText()
-            );
-            boolean success = CustomerController.registerCustomer(customer);
-            if (success) {
-                JOptionPane.showMessageDialog(this, "Customer registered successfully!");
-                txtId.setText(""); txtName.setText(""); txtAddress.setText("");
-            } else {
-                JOptionPane.showMessageDialog(this, "Registration failed.");
-            }
+            id=txtId.getText();
+            name=txtName.getText();
+            address=txtAddress.getText();
+
+            System.out.print("id -> "+id);
+
+            String success = pessengerLogic.insertPassenger(id,name,address);
+            JOptionPane.showMessageDialog(this, success);
+    
         });
         mainPanel.add(btnRegister);
     }
