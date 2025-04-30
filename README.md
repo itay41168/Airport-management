@@ -40,5 +40,5 @@ with the database using JDBC.
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/itay41168/FlightManager.git
+git clone https://github.com/itay41168/Airport-management.git
 cd FlightManager
